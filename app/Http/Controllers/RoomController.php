@@ -11,7 +11,20 @@ class RoomController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         //
+=======
+        $checkIn = $request->query('checkIn');
+        $checkOut = $request->query('checkOut');
+
+        if ($checkIn && $checkOut) {
+            $rooms = Room::available($checkIn, $checkOut)->get();
+        } else {
+            $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
+        }
+
+        return view('miranda.rooms.index', ['rooms' => $rooms, 'checkIn' => $checkIn, 'checkOut' => $checkOut]);
+>>>>>>> 1e6604a (first commit)
     }
 
     /**
@@ -35,12 +48,22 @@ class RoomController extends Controller
      */
     public function show(string $id)
     {
+<<<<<<< HEAD
         //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+=======
+        $room = Room::with(['bookings', 'amenities', 'photos'])->findOrFail($id);
+        $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
+        return view('miranda.rooms.room-details', ['rooms' => $rooms, 'room' => $room]);
+    }
+}
+
+  /*
+>>>>>>> 1e6604a (first commit)
     public function edit(string $id)
     {
         //
