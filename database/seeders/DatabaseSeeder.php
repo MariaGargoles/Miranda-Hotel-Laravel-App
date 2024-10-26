@@ -13,14 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Crear 10 usuarios con correos electrónicos únicos
-        User::factory(10)->create();
+        // User::factory(10)->create();
+        $this->call([
+            RoomSeeder::class,
+            BookingSeeder::class,
+            ContactSeeder::class,
+            PhotoSeeder::class,
+            AmenitySeeder::class,
+            RoomPhotoSeeder::class,
+            RoomAmenitySeeder::class,
+        ]);
 
-        // Crear un usuario específico con un correo específico si no existe
-        User::firstOrCreate([
-            'email' => 'test@example.com'
-        ], [
+        User::factory()->create([
             'name' => 'Test User',
+            'email' => 'test@example.com',
         ]);
     }
 }

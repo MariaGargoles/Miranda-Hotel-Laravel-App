@@ -4,15 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Contact;
+use App\Models\Room;
 
-class ContactSeeder extends Seeder
+
+class RoomSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Contact::factory()->count(50)->create();
+        Room::factory()->count(30)->create();
     }
 }
