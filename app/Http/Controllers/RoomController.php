@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Room;
 
 class RoomController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request)
     {
-<<<<<<< HEAD
-        //
-=======
         $checkIn = $request->query('checkIn');
         $checkOut = $request->query('checkOut');
 
@@ -24,64 +19,12 @@ class RoomController extends Controller
         }
 
         return view('miranda.rooms.index', ['rooms' => $rooms, 'checkIn' => $checkIn, 'checkOut' => $checkOut]);
->>>>>>> 1e6604a (first commit)
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
-<<<<<<< HEAD
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-=======
         $room = Room::with(['bookings', 'amenities', 'photos'])->findOrFail($id);
         $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
         return view('miranda.rooms.room-details', ['rooms' => $rooms, 'room' => $room]);
-    }
-}
-
-  /*
->>>>>>> 1e6604a (first commit)
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-<<<<<<< HEAD
-=======
 use App\Models\Contact;
->>>>>>> 1e6604a (first commit)
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     public function index()
     {
-<<<<<<< HEAD
-        return view('contact');
-=======
         return view('miranda.contact');
     }
 
@@ -32,6 +26,5 @@ class ContactController extends Controller
         ]));
 
         return redirect('/contact')->with('status', 'Thank you for your message!');
->>>>>>> 1e6604a (first commit)
     }
 }
