@@ -1,18 +1,35 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders; // Asegúrate de que este namespace esté correcto
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Booking;
+use Faker\Factory as Faker;
 
 class BookingSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
-    public function run(): void
+    public function run()
     {
-        Booking::factory()->count(50)->create();
+     {
+        $faker = Faker::create();
+
+        Booking::factory()->create([
+            'fullName' => $faker->name,
+            'bookDate' => now(),
+            'checkIn' => now(),
+            'checkOut' => now()->addDays(rand(1, 14)),
+            'specialRequest' => $faker->sentence,
+            'status' => 'In progress',
+            'room_id' => 1,
+            'phone' => $faker->phoneNumber,
+            'email' => $faker->email,
+            'user_id' => 1,
+            'start_date' => now()->format('Y-m-d'),
+            'end_date' => now()->addDays(rand(1, 14))->format('Y-m-d'),
+            'total_price' => $faker->randomFloat(2, 50, 300),
+        ]);
     }
 }
+}
+
+
