@@ -27,11 +27,11 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::post('/rooms/{id}/book', [BookingController::class, 'store'])->name('rooms.book');
-Route::get('/rooms', [RoomController::class, 'index'])->name('rooms');
+Route::get('/rooms', [RoomController::class, 'index'])->name('rooms') ;
 Route::get('/rooms/{id}', [RoomController::class, 'show'])->name('room-details');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/offer', [OfferController::class, 'index'])->name('offer');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
