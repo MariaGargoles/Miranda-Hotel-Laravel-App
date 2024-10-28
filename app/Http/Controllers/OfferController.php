@@ -17,6 +17,6 @@ class OfferController extends Controller
     {
         $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
         $room = Room::with(['bookings', 'amenities', 'photos'])->findOrFail($id);
-        return view('miranda.rooms.room-details', ['rooms' => $rooms, 'room' => $room]);
+        return view('miranda.rooms.room-details', ['rooms' => $rooms , 'room' => $room]);
     }
 }

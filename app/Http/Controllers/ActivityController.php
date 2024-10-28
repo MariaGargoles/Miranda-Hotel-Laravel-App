@@ -63,10 +63,10 @@ class ActivityController extends Controller
     public function edit(string $id)
     {
         $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
-
+    
         return view('activities.edit', ['activity' => $activity]);
     }
-
+    
     /**
      * Update the specified resource in storage.
      */
@@ -78,12 +78,12 @@ class ActivityController extends Controller
             'notes' => ['required', 'string', 'max:200'],
             'satisfaction' => ['required', 'integer', 'between:0,10'],
         ]);
-
+    
         $validated['paid'] = $request->boolean('paid', false);
-
+    
         $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
         $activity->update($validated);
-
+    
         return redirect()->route('activities.index')->with('success', 'Activity updated successfully!');
     }
 
@@ -94,7 +94,8 @@ class ActivityController extends Controller
     {
         $activity = Auth::user()->activities()->where('id', $id)->firstOrFail();
         $activity->delete();
-
+        
         return redirect()->route('activities.index')->with('success', 'Activity deleted successfully!');
+
     }
 }

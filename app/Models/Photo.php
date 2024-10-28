@@ -11,7 +11,7 @@ class Photo extends Model
 
     use HasFactory;
 
-    public function rooms(): BelongsToMany
+    public function rooms():BelongsToMany
     {
         return $this->belongsToMany(Room::class, 'room_photo');
     }
