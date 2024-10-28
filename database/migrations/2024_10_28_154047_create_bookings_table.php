@@ -10,8 +10,7 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('bookings', function (Blueprint $table) {
+     Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('fullName');
             $table->date('bookDate');
@@ -24,7 +23,6 @@ return new class extends Migration
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
             $table->timestamps();;
         });
-    }
 
     /**
      * Reverse the migrations.

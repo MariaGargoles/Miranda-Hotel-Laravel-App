@@ -12,17 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('rooms', function (Blueprint $table) {
-            $table->id();
-            $table->integer('roomNumber');
-            $table->enum('status', ['available', 'booked']);
-            $table->string('roomType');
-            $table->string('description');
-            $table->boolean('offer');
-            $table->integer('price');
-            $table->integer('discount');
-            $table->string('cancellation');
-            $table->timestamps();
-        });
+    $table->id();
+    $table->integer('roomNumber'); // Asegúrate de que esta línea esté presente
+    $table->string('status');
+    $table->string('roomType');
+    $table->text('description')->nullable();
+    $table->boolean('offer')->default(0);
+    $table->decimal('price', 8, 2);
+    $table->integer('discount')->nullable();
+    $table->string('cancellation')->nullable();
+    $table->timestamps();
+});
+
     }
 
     /**
