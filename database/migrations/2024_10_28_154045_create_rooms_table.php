@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
     $table->id();
-    $table->integer('roomNumber'); // Asegúrate de que esta línea esté presente
+    $table->integer('roomNumber'); 
     $table->string('status');
     $table->string('roomType');
     $table->text('description')->nullable();

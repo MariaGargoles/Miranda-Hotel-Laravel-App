@@ -10,7 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-     Schema::create('bookings', function (Blueprint $table) {
+    {
+        Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->string('fullName');
             $table->date('bookDate');
@@ -21,8 +22,9 @@ return new class extends Migration
             $table->string('email');
             $table->enum('status', ['In progress', 'Check In', 'Check Out']);
             $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
-            $table->timestamps();;
+            $table->timestamps();
         });
+    }
 
     /**
      * Reverse the migrations.
@@ -32,3 +34,4 @@ return new class extends Migration
         Schema::dropIfExists('bookings');
     }
 };
+
