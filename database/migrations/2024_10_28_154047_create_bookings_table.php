@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Clave foránea
             $table->string('fullName');
             $table->date('bookDate');
             $table->date('checkIn');
@@ -21,7 +22,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->enum('status', ['In progress', 'Check In', 'Check Out']);
-            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade');
+            $table->foreignId('room_id')->constrained('rooms')->onDelete('cascade'); // Otra clave foránea
             $table->timestamps();
         });
     }

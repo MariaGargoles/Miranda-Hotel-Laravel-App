@@ -10,7 +10,7 @@ class RoomSeeder extends Seeder
     public function run()
     {
         Room::create([
-            'roomNumber' => 56,
+            'room_number' => 56,
             'status' => 'available',
             'roomType' => 'Suite',
             'description' => 'Aliquam doloremque vero consequuntur velit et dolorem ea a. Debitis dicta dolore doloremque aut. Sed aut quibusdam in ab.',
