@@ -4,14 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Activity extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'dateTime', 'notes', 'user_id'];
+    protected $fillable = ['type', 'dateTime', 'notes', 'user_id', 'paid', 'satisfaction'];
 
     public function user(): BelongsTo
     {

@@ -4,59 +4,50 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\DB;
 use App\Models\Booking;
+use App\Models\Photo;
 use App\Models\Amenity;
-use App\Models\Image;
-use App\Models\RoomType;
-use App\Models\RoomTypeImage;
+use App\Models\RoomPhoto;
+use App\Models\RoomAmenity;
 
 class Room extends Model
 {
     use HasFactory;
 
-    public function bookings(): HasMany
-    {
-        return $this->hasMany(Booking::class, 'roomId');
-    }
+    protected $fillable = ['roomNumber', 'status', 'roomType', 'description', 'offer', 'price', 'discount', 'cancellation'];
 
-    public static function available($checkin, $checkout)
+    public static function available($checkIn, $checkOut)
     {
-        return self::whereDoesntHave('bookings', function (Builder $query) use ($checkin, $checkout) {
-            $query->where('checkOutDate', '>=', $checkin)
-                ->where('checkInDate', '<=', $checkout);
+        return self::whereDoesntHave('bookings', function (Builder $query) use ($checkIn, $checkOut) {
+            $query->where(function ($query) use ($checkIn, $checkOut) {
+                $query->where('checkIn', '<=', $checkOut)
+                      ->where('checkOut', '>=', $checkIn);
+            });
         });
     }
 
-    public static function onOffer()
+
+
+    public function bookings(): HasMany
     {
-        return Room::where('offer', 'Yes')
-            ->orderBy('discount', 'desc')
-            ->get()
-            ->map(function ($room) {
-                $room->offerRate = $room->rate * $room->discount / 100;
-                return $room;
-            })
-            ->slice(0, 3);
+        return $this->hasMany(Booking::class);
     }
 
     public function amenities(): BelongsToMany
     {
-        return $this->belongsToMany(Amenity::class, 'rooms_amenities', 'roomId', 'amenityId');
+        return $this->belongsToMany(Amenity::class, 'room_amenity');
     }
 
-    public function type(): BelongsTo
+    public function photos(): BelongsToMany
     {
-        return $this->belongsTo(RoomType::class, 'roomType');
+        return $this->belongsToMany(Photo::class, 'room_photo', 'room_id', 'photo_id');
     }
 
-    public function images(): BelongsToMany
+    public function photoUrl()
     {
-        return $this->belongsToMany(Image::class, 'room_type_images', 'roomType', 'imageId');
+        return $this->photos()->first() ? $this->photos()->first()->photo_url : 'default.jpg';
     }
 }

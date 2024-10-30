@@ -4,7 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\Room;
+use App\Models\Amenity;
 
 class RoomAmenitySeeder extends Seeder
 {
@@ -13,15 +14,13 @@ class RoomAmenitySeeder extends Seeder
      */
     public function run(): void
     {
-        for ($roomId = 1; $roomId <= 50; $roomId++) {
-            $amenities = array_rand(array_flip(range(1, 7)), rand(3, 7));
+        $rooms = Room::all();
+        $amenities = Amenity::all();
 
-            foreach ($amenities as $amenityId) {
-                DB::table('rooms_amenities')->insert([
-                    'roomId' => $roomId,
-                    'amenityId' => $amenityId,
-                ]);
-            }
+        foreach ($rooms as $room) {
+            $room->amenities()->attach(
+                $amenities->random(rand(1, 5))->pluck('id')->toArray()
+            );
         }
     }
 }

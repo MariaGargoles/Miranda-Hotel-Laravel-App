@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,13 +13,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \DB::unprepared(file_get_contents('./seed.sql'));
+        // User::factory(10)->create();
+        $this->call([
+            RoomSeeder::class,
+            BookingSeeder::class,
+            ContactSeeder::class,
+            PhotoSeeder::class,
+            AmenitySeeder::class,
+            RoomPhotoSeeder::class,
+            RoomAmenitySeeder::class,
+        ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
-        DB::table('rooms_amenities')->truncate();
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        $this->call(RoomAmenitySeeder::class);
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
     }
 }
