@@ -4,15 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Room;
 
-class Photo extends Model
+class Image extends Model
 {
-    protected $fillable = ['photo_url'];
-
     use HasFactory;
 
-    public function rooms():BelongsToMany
+    public function roomTypes(): BelongsToMany
     {
-        return $this->belongsToMany(Room::class, 'room_photo');
+        return $this->belongsToMany(RoomType::class, 'room_type_images', 'imageId', 'roomType');
     }
 }

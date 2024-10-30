@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Activity;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -46,7 +47,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function activities():HasMany
+    public function activities(): HasMany
     {
         return $this->hasMany(Activity::class);
     }
