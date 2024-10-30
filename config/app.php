@@ -2,6 +2,11 @@
 
 return [
 
+    'providers' => [
+    App\Providers\BookingServiceProvider::class,
+],
+
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
