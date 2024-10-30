@@ -2,25 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
     public function index()
     {
-        return view('contact');
+        return view('miranda.contact');
     }
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'client_name' => 'required|string|max:255',
-            'client_phone' => 'required|string|max:15',
-            'client_email' => 'required|email|max:255',
-            'subject' => 'required|string|max:255',
-            'comment' => 'required|string',
-            
+        $validated = $request->validate([
+            'client_name' => ['required', 'string'],
+            'client_phone' => ['required', 'string'],
+            'client_email' => ['required', 'string'],
+            'subject' => ['required', 'string'],
+            'comment' => ['required', 'string'],
         ]);
-        return redirect()->back()->with('success', 'Your message has been sent successfully!');
+        $comment = Contact::create(array_merge($validated, [
+            'read' => false,
+        ]));
+
+        return redirect('/contact')->with('status', 'Thank you for your message!');
     }
 }
