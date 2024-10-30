@@ -16,10 +16,10 @@ return new class extends Migration
             $table->enum('type', ['Surf', 'Windsurf', 'Kayak', 'ATV', 'Hot air baloon']);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->dateTime('dateTime');
+            $table->dateTime('dateTime', precision: 0);
             $table->boolean('paid')->default(false);
-            $table->text('notes')->nullable();
-            $table->integer('satisfaction')->nullable();
+            $table->tinyText('notes');
+            $table->enum('satisfaction', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])->nullable();
             $table->timestamps();
         });
     }
