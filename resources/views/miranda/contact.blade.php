@@ -28,7 +28,7 @@
                     alt="icono de un telefono recibinedo una llamada">
                 <div class="contact__card-text footer__contact-info-text">
                     <p>Phone Number</p>
-                    <p>608410012</p>
+                    <p>648504232</p>
                 </div>
             </div>
             <p class="contact__card-number contact__card-number--position">02</p>
@@ -39,7 +39,7 @@
                     alt="icono de un sobre con un numero 1 en un bocadillo indicando que se tiene un mensaje sin leer">
                 <div class="contact__card-text footer__contact-info-text">
                     <p>Email</p>
-                    <p>jorgemc1294@gmail.com</p>
+                    <p>mariagargoles.dev@gmail.com</p>
                 </div>
             </div>
             <p class="contact__card-number contact__card-number--position">03</p>
