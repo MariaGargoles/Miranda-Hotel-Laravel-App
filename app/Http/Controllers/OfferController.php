@@ -9,8 +9,9 @@ class OfferController extends Controller
 {
     public function index()
     {
-        $rooms = Room::with(['bookings', 'amenities', 'photos'])->get();
-        return view('miranda.offer', compact('rooms'));
+        $rooms = Room::with(['bookings', 'amenities', 'photos'])
+                 ->whereNotNull('discounted_price')
+                 ->get();
     }
 
     public function show(string $id)
