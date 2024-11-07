@@ -1,44 +1,22 @@
-name: Deploy Miranda Project
+name: CI
 
 on:
   push:
-    branches:
-      - main
-
+    branches: ["main"]
 jobs:
-  deploy:
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Check out the code
-      - name: Check out repository
-        uses: actions/checkout@v3
-
-      # 2. Set up SSH key
-      - name: Set up SSH key
-        uses: webfactory/ssh-agent@v0.5.3
+      - name: Hotel Miranda Laravel website's CI/CD
+        uses: appleboy/ssh-action@v1.0.3
         with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      # 3. Connect to EC2 and deploy the changes
-      - name: Deploy to EC2
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_HOST }} << 'EOF'
-            cd /var/www/Laravel  
-            
-            # Actualizar código desde GitHub
-            git pull origin main
-
-            # Instalar dependencias para Laravel
-            cd /var/www/Laravel  
-            composer install --no-dev --optimize-autoloader
-
-            # Realizar migraciones de Laravel
-            php artisan migrate --force
-
-            # Reiniciar servidor Apache
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/Laravel
+            git pull
+            ./vendor/bin/sail composer install --no-interaction --prefer-dist
+            ./vendor/bin/sail artisan migrate --force
             sudo systemctl restart apache2
-
-            # Verifica que la aplicación esté funcionando
-            curl http://51.44.17.109  
-          EOF
