@@ -30,7 +30,7 @@
     <div class="about-us__background"></div>
     <div class="about-us__inner --max-width">
         <section class="about-us__info">
-            <h2 class="font__title font__title--weight-700 upper__case">About Us Us</h2>
+            <h2 class="font__title font__title--weight-700 upper__case">About Us</h2>
             <p class="font__subtitle font__subtitle--height">Discover Our Underground.</p>
             <p class="font__text">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit,
