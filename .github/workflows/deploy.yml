@@ -14,9 +14,11 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
           script: |
+            echo "Inicio del despliegue..."
             cd /var/www/Laravel
-            git pull
+            git pull origin main
             ./vendor/bin/sail composer install --no-interaction --prefer-dist
             ./vendor/bin/sail artisan migrate --force
             sudo systemctl restart apache2
