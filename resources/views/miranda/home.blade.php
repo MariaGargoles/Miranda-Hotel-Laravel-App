@@ -19,7 +19,7 @@
                 <input class="checking__input" type="date" name="checkIn" id="checkIn">
             </div>
             <div class="form__control-input">
-                <label class="checking__label" for="checkOut">LeDeparture Date</label>
+                <label class="checking__label" for="checkOut">Departure Date</label>
                 <input class="checking__input" type="date" name="checkOut" id="checkOut">
             </div>
         </div>
@@ -39,7 +39,7 @@
                 ex ea commodo consequat.
             </p>
 
-            <button class="button upper__case"><a href="rooms.html">Book Now</a></button>
+            <button class="button upper__case"><a href="{{ route('rooms') }}">Book Now</a></button>
         </section>
         <section class="about-us__features">
             <img class="about-us__features-img" src="{{ asset('assets/img/team.jpg') }}" alt="">
@@ -68,7 +68,7 @@
     <p class="font__subtitle">Hand Picked Rooms</p>
     <menu class="rooms__menu">
         <span class="rooms__menu-item">
-            <img src="{{ ('assets/icon/bed.svg') }}" alt="icono de una cama">
+            <img src="{{ asset('assets/icon/bed.svg') }}" alt="icono de una cama">
         </span>
         <span class="rooms__menu-item">
             <img src="{{ asset('assets/icon/wifi.svg') }}" alt="icono de conexión wifi">
@@ -93,11 +93,14 @@
         <!-- Additional required wrapper -->
         <div class="rooms__swiper-wrapper swiper-wrapper">
             <!-- Slides -->
-            <div class="rooms__swiper-slide swiper-slide" style="background-image: url(assets/img/luxury-room.jpg);">
+            <div class="rooms__swiper-slide swiper-slide"
+                style="background-image: url({{ asset('assets/img/luxury-room.jpg') }});">
             </div>
-            <div class="rooms__swiper-slide swiper-slide" style="background-image: url(assets/img/luxury-room-3.jpg);">
+            <div class="rooms__swiper-slide swiper-slide"
+                style="background-image: url({{ asset('assets/img/luxury-room-3.jpg') }});">
             </div>
-            <div class="rooms__swiper-slide swiper-slide" style="background-image: url(assets/img/luxury-room-2.jpg);">
+            <div class="rooms__swiper-slide swiper-slide"
+                style="background-image: url({{ asset('assets/img/luxury-room-2.jpg') }});">
             </div>
         </div>
         <!-- If we need navigation buttons -->
@@ -133,7 +136,7 @@
         <iframe id="player" class="intro-video__video" src="https://www.youtube.com/embed/Bu3Doe45lcU"
             title="Hotel Miranda in Bayahibe Dom. Rep. 4K" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; picture-in-picture;" allowfullscreen></iframe>
-        <button class="intro-video__button button upper__case"><a href="offers.html">Book Now</a></button>
+        <button class="intro-video__button button upper__case"><a href="{{ route('offers') }}">Book Now</a></button>
     </div>
 </section>
 <section class="facilities --max-width">
@@ -148,7 +151,7 @@
                     <p class="facilities__swiper-slide-number">
                         01
                     </p>
-                    <img class="facilities__swiper-slide-img" src="{{ ('assets/img/high-rating.svg') }}" alt="">
+                    <img class="facilities__swiper-slide-img" src="{{ asset('assets/img/high-rating.svg') }}" alt="">
                     <p class="facilities__swiper-slide-title">Have High Rating</p>
                     <p class="facilities__swiper-slide-text">
                         Lorem ipsum dolor sit amet,
@@ -197,7 +200,7 @@
                     <p class="facilities__swiper-slide-number">
                         05
                     </p>
-                    <img class="facilities__swiper-slide-img" src="{{ ('assets/img/payment.svg') }}" alt="">
+                    <img class="facilities__swiper-slide-img" src="{{ asset('assets/img/payment.svg') }}" alt="">
                     <p class="facilities__swiper-slide-title">Payment Options</p>
                     <p class="facilities__swiper-slide-text">
                         Lorem ipsum dolor sit amet,
@@ -241,10 +244,10 @@
                             <p>Eggs & Bacon</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do eiusmod tempor.</p>
                         </div>
-                        <img class="menu__article-arrow" src="{{ ('assets/icon/arrow-hover.svg') }}" alt="">
+                        <img class="menu__article-arrow" src="{{ asset('assets/icon/arrow-hover.svg') }}" alt="">
                     </article>
                     <article class="menu__article">
-                        <img class="menu__article-img" src="{{ ('assets/img/tea-coffe.jpg') }}" alt="">
+                        <img class="menu__article-img" src="{{ asset('assets/img/tea-coffe.jpg') }}" alt="">
                         <div class="menu__article-text">
                             <p>Tea or Coffe</p>
                             <p>Lorem ipsum dolor sit amet, consectetur adip isicing elit, sed do eiusmod tempor.</p>
@@ -321,12 +324,14 @@
         <!-- Additional required wrapper -->
         <div class="menu__swiper-wrapper swiper-wrapper">
             <!-- Slides -->
-            <div class="menu__swiper-slide swiper-slide" style="background-image: url(assets/img/cooked-food.jpg);">
+            <div class="menu__swiper-slide swiper-slide"
+                style="background-image: url({{ asset('assets/img/cooked-food.jpg') }});">
             </div>
             <div class="menu__swiper-slide swiper-slide"
-                style="background-image: url(assets/img/food-photography.jpg);">
+                style="background-image: url({{ asset('assets/img/food-photography.jpg') }});">
             </div>
-            <div class="menu__swiper-slide swiper-slide" style="background-image: url(assets/img/grilled-steak.jpg);">
+            <div class="menu__swiper-slide swiper-slide"
+                style="background-image: url({{ asset('assets/img/grilled-steak.jpg') }});">
             </div>
         </div>
     </div>
@@ -360,20 +365,27 @@
 
 
 @endsection
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('availabilityForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            toastr.success('Redirecting to available rooms...', {
-                timeOut: 5000,
-            });
-            setTimeout(function() {
-                event.target.submit();
-            }, 1000);
-        });
-    });
-</script>
 
+@section('scripts')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('availabilityForm');
+        if (form) {
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                if (typeof toastr !== 'undefined') {
+                    toastr.success('Redirecting to available rooms...', {
+                        timeOut: 5000,
+                    });
+                }
+                setTimeout(function() {
+                    event.target.submit();
+                }, 1000);
+            });
+        }
+    });
+</script>
+@endsection
