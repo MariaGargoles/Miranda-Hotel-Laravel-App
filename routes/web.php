@@ -34,4 +34,16 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::get('/offer', [OfferController::class, 'index'])->name('offer');
 
+// Payment routes
+Route::prefix('payment')->name('payment.')->group(function () {
+    Route::get('/checkout/{booking}', [\App\Http\Controllers\PaymentController::class, 'createCheckoutSession'])->name('checkout');
+    Route::get('/success', [\App\Http\Controllers\PaymentController::class, 'success'])->name('success');
+    Route::get('/cancel', [\App\Http\Controllers\PaymentController::class, 'cancel'])->name('cancel');
+    Route::get('/status/{booking}', [\App\Http\Controllers\PaymentController::class, 'show'])->name('status');
+    Route::post('/webhook', [\App\Http\Controllers\PaymentController::class, 'webhook'])->name('webhook');
+});
+
+// Booking routes
+Route::get('/booking/{id}', [BookingController::class, 'show'])->name('booking.show');
+
 require __DIR__.'/auth.php';
